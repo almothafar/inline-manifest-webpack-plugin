@@ -1,3 +1,5 @@
 .idea
 node_modules
 yarn-error.log
+webpack-inline-manifest-plugin.iml
+yarn.lock
