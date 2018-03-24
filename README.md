@@ -22,25 +22,25 @@ __Step1__: split out the runtime code
 ```javascript
 // for explicit vendor chunk config
 [
-	new webpack.optimize.CommonsChunkPlugin({
-		names: ['vendor', 'manifest']
-	})
+    new webpack.optimize.CommonsChunkPlugin({
+        names: ['vendor', 'manifest']
+    })
 ]
 
 // or specify which chunk to split manually
 [
-	new webpack.optimize.CommonsChunkPlugin({
-		name: 'manifest',
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'manifest',
         chunks: ['...']
-	})
+    })
 ]
 ```
 __Step2__: config HtmlWebpackPlugin:
 ```javascript
 [
-	new HtmlWebpackPlugin({
-		template: './index.ejs'
-	})
+    new HtmlWebpackPlugin({
+        template: './index.ejs'
+    })
 ]
 ```
 
@@ -56,9 +56,9 @@ const WebpackInlineManifestPlugin = require('webpack-inline-manifest-plugin');
 Config:
 ```javascript
 [
-	new WebpackInlineManifestPlugin({
-		name: 'webpackManifest'
-	})
+    new WebpackInlineManifestPlugin({
+        name: 'webpackManifest'
+    })
 ]
 ```
 
@@ -67,16 +67,15 @@ Finally in HTML:
 <!-- index.ejs -->
 <!doctype html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<title>App</title>
-</head>
-<body>
-
-
-<%=htmlWebpackPlugin.files.webpackManifest%>
-
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>App</title>
+    </head>
+    <body>
+    
+    <%=htmlWebpackPlugin.files.webpackManifest%>
+    
+    </body>
 </html>
 ```
 __Done!__
