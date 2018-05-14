@@ -1,11 +1,11 @@
 {
   "name": "webpack-inline-manifest-plugin",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "inline your Webpack manifest.js with a script tag to save http request",
   "main": "index.js",
   "scripts": {
     "lint": "npm run eslint --debug -v --color --ext .js",
-    "eslint" : "eslint"
+    "eslint": "eslint"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,10 @@
     "eslint": "^4.19.1",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-promise": "^3.7.0",
-    "eslint-plugin-standard": "^3.0.1"
+    "eslint-plugin-standard": "^3.1.0"
+  },
+  "peerDependencies": {
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.0.0"
   }
 }
