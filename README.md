@@ -16,35 +16,31 @@ $ npm i webpack-inline-manifest-plugin -D
 Basic Usage
 -----------
 
-This plugin need to work with [HtmlWebpackPlugin](https://www.npmjs.com/package/html-webpack-plugin) v2.10.0 and above:
+This plugin need to work with [webpack v4+](https://github.com/webpack/webpack) and [HtmlWebpackPlugin v3](https://www.npmjs.com/package/html-webpack-plugin):
+
+>*For webpack v3 and below, please use [version 4.0.0](https://github.com/almothafar/webpack-inline-manifest-plugin/releases/tag/v4.0.0) or original library [inline-manifest-webpack-plugin](https://github.com/szrenwei/inline-manifest-webpack-plugin/releases/tag/v3.0.1)*
 
 __Step1__: split out the runtime code
 ```javascript
-// for explicit vendor chunk config
-[
-    new webpack.optimize.CommonsChunkPlugin({
-        names: ['vendor', 'manifest']
-    })
-]
+// the default name is "runtime"
+optimization: {
+    runtimeChunk: 'single'
+}
 
-// or specify which chunk to split manually
-[
-    new webpack.optimize.CommonsChunkPlugin({
-        name: 'manifest',
-        chunks: ['...']
-    })
-]
+// or specify another name
+optimization: {
+    name: 'webpackManifest'
+}
 ```
-__Step2__: config HtmlWebpackPlugin:
+__Step2__: add and config [HtmlWebpackPlugin](https://github.com/jantimon/html-webpack-plugin):
 ```javascript
 [
-    new HtmlWebpackPlugin({
-        template: './index.ejs'
-    })
+    // https://github.com/jantimon/html-webpack-plugin
+    new HtmlWebpackPlugin()
 ]
 ```
 
-__Step3__: config WebpackInlineManifestPlugin
+__Step3__: config WebpackInlineManifestPlugin, you need to add this right after `HtmlWebpackPlugin`
 * __name__: default value is `webpackManifest`,  result in `htmlWebpackPlugin.files[name]`, you can specify any other name __except__ `manifest`, beacuse the name `manifest` haved been used by HtmlWebpackPlugin for H5 app cache manifest.
 
 Call:
@@ -56,8 +52,9 @@ const WebpackInlineManifestPlugin = require('webpack-inline-manifest-plugin');
 Config:
 ```javascript
 [
+    new HtmlWebpackPlugin(),
     new WebpackInlineManifestPlugin({
-        name: 'webpackManifest'
+        name: 'webpackManifest' // must be the same value of runtimeChunk's name
     })
 ]
 ```
@@ -78,4 +75,4 @@ Finally in HTML:
     </body>
 </html>
 ```
-__Done!__
+__Done!__ This will replace the external script with inline code.
