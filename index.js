@@ -25,8 +25,9 @@ InlineManifestPlugin.prototype.apply = function (compiler) {
             })[0] || {files: []}).files[0];
 
             if (manifestPath) {
+                const source = sourceMappingURL.removeFrom(compilation.assets[manifestPath].source().toString());
                 webpackManifest.push('<script>');
-                webpackManifest.push(sourceMappingURL.removeFrom(compilation.assets[manifestPath].source()));
+                webpackManifest.push(source);
                 webpackManifest.push('</script>');
 
                 const manifestIndex = assets.js.indexOf(assets.publicPath + manifestPath);
